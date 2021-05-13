@@ -27,6 +27,12 @@ args = parser.parse_args()
 config = dotenv_values(".env")
 
 test_channel_link = "test20210513"
+try:
+    api_id = config["api_id"]
+    api_hash = config["api_hash"]
+except KeyError as e:
+    print(e)
+    raise Exception("you need to create a .env file containing api_id and api_hash, read the readme.md file")
 client = TelegramClient("session_name", config["api_id"], config["api_hash"])
 client.start()
 
