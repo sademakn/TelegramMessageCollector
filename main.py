@@ -32,4 +32,6 @@ client.start()
 
 for message in client.iter_messages(args.source_chat):
     client.forward_messages(entity=args.target_chat, messages=message)
+    if args.sleep_time:
+        sleep(float(args.sleep_time))
 client.send_message(args.target_chat, f"all messages coppied successfully")
