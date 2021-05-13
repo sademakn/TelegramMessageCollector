@@ -13,3 +13,4 @@ api_hash=123456789abcdefghijklmnopqrstuvwxyz
 
 TODO:  
 add filters for audio, photo, text, video, etc.
+add Docker configuratioin
