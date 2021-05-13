@@ -21,4 +21,7 @@ config = dotenv_values(".env")
 test_channel_link = "test20210513"
 client = TelegramClient("session_name", config["api_id"], config["api_hash"])
 client.start()
-client.send_message(test_channel_link, "hello")
+
+for message in client.iter_messages(args.source_chat):
+    client.forward_messages(entity=args.target_chat, messages=message)
+client.send_message(args.target_chat, f"all messages coppied successfully")
