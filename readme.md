@@ -9,7 +9,7 @@ api_id=1234567
 api_hash=123456789abcdefghijklmnopqrstuvwxyz
 ```
 5- run python file in terminal like bellow:  
-```torsocks python main.py --source-chat='xxxxx' --target-chat='xxxxx' --sleep-time=1  ```
+``` python main.py --source-chat='xxxxx' --target-chat='xxxxx' --sleep-time=1  ```
 
 TODO:  
 add filters for audio, photo, text, video, etc.
