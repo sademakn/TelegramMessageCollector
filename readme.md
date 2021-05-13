@@ -12,5 +12,5 @@ api_hash=123456789abcdefghijklmnopqrstuvwxyz
 ``` python main.py --source-chat='xxxxx' --target-chat='xxxxx' --sleep-time=1  ```
 
 TODO:  
-add filters for audio, photo, text, video, etc.
+add filters for audio, photo, text, video, etc.  
 add Docker configuratioin
