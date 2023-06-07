@@ -1,8 +1,8 @@
 from dotenv import dotenv_values
-from telethon import TelegramClient, events, sync
+from telethon import TelegramClient, events, sync, errors
 import argparse
 from time import sleep
-
+from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -36,8 +36,22 @@ except KeyError as e:
 client = TelegramClient("session_name", config["api_id"], config["api_hash"])
 client.start()
 
-for message in client.iter_messages(args.source_chat):
-    client.forward_messages(entity=args.target_chat, messages=message)
-    if args.sleep_time:
-        sleep(float(args.sleep_time))
+
+target_chat = client.get_entity(args.target_chat)
+tq = tqdm()
+
+offset_id = 0
+while True:
+    for message in client.iter_messages(args.source_chat, reverse=True, offset_id=offset_id):
+        try:
+            client.forward_messages(entity=target_chat, messages=message)
+        except errors.FloodWaitError as e:
+            print('flood for', e.seconds)
+        except Exception as e:
+            print(e)
+            continue
+        tq.update(1)
+        if args.sleep_time:
+            sleep(float(args.sleep_time))
+        offset_id = message.id
 client.send_message(args.target_chat, f"all messages coppied successfully")
